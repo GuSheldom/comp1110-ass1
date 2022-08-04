@@ -103,7 +103,7 @@ public class Hex {
      */
     public boolean isEmpty() {
         // FIXME: Task 2
-        return false;
+        return this.type == HexType.EMPTY;
     }
 
     /**
