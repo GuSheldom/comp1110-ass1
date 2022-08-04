@@ -200,7 +200,55 @@ public class PenguinsPoolParty {
      */
     public Hex[] getNeighbours(Hex hex) {
         // FIXME: Task 4
-        return new Hex[6];
+        Hex[] hexes = new Hex[6];
+        int myX = hex.getX();
+        int myY = hex.getY();
+        //the north neighbour
+        if (myY == 0){
+            hexes[0] = null;
+        }else{
+            hexes[0] = getHex(myX,(myY - 1));
+        }
+        //the northeast
+        if (myX == 4 || (myY == 0 && myX % 2 == 1)){
+            hexes[1] = null;
+        }else if(myX % 2 == 1){
+            hexes[1] = getHex(myX + 1,myY - 1);
+        }else{
+            hexes[1] = getHex(myX + 1,myY);
+        }
+        //the southeast
+        if (myX == 4 || (myY == 3 && myX % 2 == 0)){
+            hexes[2] = null;
+        }else if(myX % 2 == 1){
+            hexes[2] = getHex(myX + 1,myY);
+        }else{
+            hexes[2] = getHex(myX + 1,myY + 1);
+        }
+        //the south neighbour
+        if (myY == 3){
+            hexes[3] = null;
+        }else{
+            hexes[3] = getHex(myX,myY + 1);
+        }
+        //the southwest
+        if (myX == 0 || (myY == 3 && myX % 2 == 0)){
+            hexes[4] = null;
+        }else if(myX % 2 == 1){
+            hexes[4] = getHex(myX - 1,myY);
+        }else{
+            hexes[4] = getHex(myX - 1,myY + 1);
+        }
+        //the northwest
+        if (myX == 0 || (myY == 0 && myX % 2 == 1)){
+            hexes[5] = null;
+        }else if(myX % 2 == 1){
+            hexes[5] = getHex(myX - 1,myY - 1);
+        }else{
+            hexes[5] = getHex(myX - 1,myY);
+        }
+
+        return hexes;
     }
 
     /**
