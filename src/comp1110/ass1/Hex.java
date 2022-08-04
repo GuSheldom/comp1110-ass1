@@ -111,7 +111,7 @@ public class Hex {
      */
     public boolean isXEven() {
         // FIXME: Task 3
-        return false;
+        return this.x % 2 == 0;
     }
 
     /**
