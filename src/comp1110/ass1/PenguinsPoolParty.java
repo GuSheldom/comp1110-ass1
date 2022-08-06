@@ -300,7 +300,7 @@ public class PenguinsPoolParty {
 
         String t = this.boardToString(); //get the string of types
 
-        Hex[] iceHex = ice.getHexes();
+        Hex[] iceHex = ice.getHexes();// get the list of icebox hex
         boolean isFlag = true;
         for (Hex hex : iceHex){
             int x = hex.getX();
@@ -335,6 +335,13 @@ public class PenguinsPoolParty {
      */
     public void placeIceBlock(Ice ice) {
         // FIXME: Task 8a
+        Hex[] iceHex = ice.getHexes(); // get the list of icebox hex
+        for (Hex hex : iceHex) {
+            int x = hex.getX();// get the x and y coordinate
+            int y = hex.getY();
+            this.setHex(x,y,HexType.ICE);
+        }
+        ice.setOnBoard(true);
     }
 
     /**
@@ -359,6 +366,13 @@ public class PenguinsPoolParty {
      */
     public void removeIceBlock(Ice ice) {
         // FIXME: Task 8b
+        Hex[] iceHex = ice.getHexes(); // get the list of icebox hex
+        for (Hex hex : iceHex) {
+            int x = hex.getX();// get the x and y coordinate
+            int y = hex.getY();
+            this.setHex(x,y,HexType.EMPTY);
+        }
+        ice.setOnBoard(false);
     }
 
     /**
