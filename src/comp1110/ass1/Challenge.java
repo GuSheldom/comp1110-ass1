@@ -113,7 +113,7 @@ public class Challenge {
     public static Challenge newChallenge(int difficulty) {
         assert difficulty >= 0 && difficulty <= 3;
         // FIXME: Task 5
-        int pNum = 0;
+        int pNum;
         if(difficulty < 3) {
             pNum = (int) ((Math.random() + difficulty) * 16);
         }else{

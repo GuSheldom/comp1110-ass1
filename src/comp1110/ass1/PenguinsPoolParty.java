@@ -263,7 +263,15 @@ public class PenguinsPoolParty {
      */
     public boolean isSolution() {
         // FIXME: Task 6
-        return false;
+        String t = this.boardToString(); //get the string of types
+        char[] types = t.toCharArray();
+        int count = 0;
+        for (char i : types){
+            if (i == 'I'){
+                count ++; // count the number of I
+            }
+        }
+        return count == 16;
     }
 
     /**
