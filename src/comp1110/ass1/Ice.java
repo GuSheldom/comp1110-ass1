@@ -1,5 +1,7 @@
 package comp1110.ass1;
 
+
+
 public class Ice {
 
     // The hexagons making up the ice block
@@ -201,6 +203,36 @@ public class Ice {
      */
     public void fixSymmetries() {
         // FIXME: Task 9
+        while (this.id == 'C' && (this.rotation > 2 && this.rotation < 6)){
+            Hex[] newHexes = new Hex[this.hexes.length];
+            for (int i = 0; i < 4;i++){
+                newHexes[i] = this.hexes[newHexes.length - i - 1];//reverse the hex array
+            }
+            this.setHexes(newHexes);
+            switch (this.rotation){
+                case 3 -> {
+                    if (this.originX % 2 == 1){
+                        this.originY += 2; // the y need to plus 2 when origin x is odd
+                    }else{
+                        this.originY += 3;
+                    }
+                    this.originX += 1;
+                    this.setRotation(0);
+                }
+                case 4 -> {
+                    this.originX -= 2;
+                    this.originY += 2;
+                    this.setRotation(1);
+                }
+                case 5 -> {
+                    if (this.originX % 2 == 1){
+                        this.originY -= 1; //the y need to minus 1 only when x is odd
+                    }
+                    this.originX -= 3;
+                    this.setRotation(2);
+                }
+            }
+        }
     }
 
     /**
