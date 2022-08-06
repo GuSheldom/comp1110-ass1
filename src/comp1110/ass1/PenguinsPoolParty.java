@@ -297,7 +297,21 @@ public class PenguinsPoolParty {
      */
     public boolean isIcePlacementValid(Ice ice) {
         // FIXME: Task 7
-        return false;
+
+        String t = this.boardToString(); //get the string of types
+
+        Hex[] iceHex = ice.getHexes();
+        boolean isFlag = true;
+        for (Hex hex : iceHex){
+            int num;
+            num = hex.getX() + hex.getY() * 6;
+            if (num > 24 || num < 0){
+                return false;
+            }else {
+                isFlag = isFlag && (t.charAt(num) == 'E');
+            }
+        }
+        return isFlag;
     }
 
     /**
