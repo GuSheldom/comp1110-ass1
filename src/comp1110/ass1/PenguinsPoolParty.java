@@ -303,11 +303,12 @@ public class PenguinsPoolParty {
         Hex[] iceHex = ice.getHexes();
         boolean isFlag = true;
         for (Hex hex : iceHex){
-            int num;
-            num = hex.getX() + hex.getY() * 6;
-            if (num > 24 || num < 0){
+            int x = hex.getX();
+            int y = hex.getY();
+            if (x < 0 || x > 4 || y < 0 || y > 3){
                 return false;
             }else {
+                int num = x + y * 6;
                 isFlag = isFlag && (t.charAt(num) == 'E');
             }
         }
