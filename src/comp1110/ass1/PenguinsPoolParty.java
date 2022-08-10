@@ -298,7 +298,7 @@ public class PenguinsPoolParty {
     public boolean isIcePlacementValid(Ice ice) {
         // FIXME: Task 7
 
-        String t = this.boardToString(); //get the string of types
+
 
         Hex[] iceHex = ice.getHexes();// get the list of icebox hex
         boolean isFlag = true;
@@ -308,8 +308,8 @@ public class PenguinsPoolParty {
             if (x < 0 || x > 4 || y < 0 || y > 3){
                 return false;
             }else {
-                int num = x + y * 6;
-                isFlag = isFlag && (t.charAt(num) == 'E');
+
+                isFlag = isFlag && (this.board[x][y].getType() == HexType.EMPTY);
             }
         }
         return isFlag;
@@ -398,6 +398,7 @@ public class PenguinsPoolParty {
      */
     public String[] getAllValidPlacements() {
         // FIXME: Task 10
+
         return new String[0];
     }
 
