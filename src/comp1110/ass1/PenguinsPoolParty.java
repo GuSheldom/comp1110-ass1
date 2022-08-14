@@ -449,7 +449,7 @@ public class PenguinsPoolParty {
      */
     public String findSolution() {
         // FIXME: Task 11
-        int i = 0,j ,m ,n;
+        int i = 0,j ,m ,n ;
         String[] allA, allB, allC, allD;
         allA = this.getAllValidPlacements();
         while (allA[i].charAt(0) == 'A') {
