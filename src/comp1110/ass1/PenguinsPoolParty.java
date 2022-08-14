@@ -1,5 +1,9 @@
 package comp1110.ass1;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+
 public class PenguinsPoolParty {
 
     // The game board
@@ -44,7 +48,7 @@ public class PenguinsPoolParty {
      * Constructs an instance of the Penguins Pool Party using a given initial
      * state and an array of ice block placements. Note that there is no
      * challenge corresponding to this constructor.
-     *
+     * <p>
      * This constructor is used only for unit tests. You shouldn't find any
      * need to use it for your own implementation.
      *
@@ -131,7 +135,7 @@ public class PenguinsPoolParty {
     /**
      * @param x the x-coordinate of the hex
      * @param y the y-coordinate of the hex
-     * @return  the hex at the given coordinates
+     * @return the hex at the given coordinates
      */
     public Hex getHex(int x, int y) {
         return this.board[x][y];
@@ -183,20 +187,20 @@ public class PenguinsPoolParty {
      * first neighbouring hex as the one at 12 o'clock of the given hex. If a
      * potential neighbour is off the board, its place in the resulting array
      * should contain `null`.
-     *
+     * <p>
      * Hint 1: the locations of the neighbours of a hex depend on the x-coordinate
      * of that hex. You might want to break this method up into sub-problems
      * depending on the x-coordinate of the given hex. Consult the readme for
      * the design of the board, and draw out the board on paper if you need.
-     *
+     * <p>
      * Hint 2: Make sure you use the `board` field provided to you in this
      * class. This is important for later tasks. Please do not create any new
      * instances of the Hex class in your implementation.
      *
      * @param hex the hex whose neighbours we wish to find
      * @return the neighbours of the given hex, in the order: <north neighbour>,
-     *         <north-east neighbour>, <south-east neighbour>, <south neighbour>,
-     *         <south-west neighbour>, <north-west neighbour>.
+     * <north-east neighbour>, <south-east neighbour>, <south neighbour>,
+     * <south-west neighbour>, <north-west neighbour>.
      */
     public Hex[] getNeighbours(Hex hex) {
         // FIXME: Task 4
@@ -204,48 +208,48 @@ public class PenguinsPoolParty {
         int myX = hex.getX();
         int myY = hex.getY();
         //the north neighbour
-        if (myY == 0){
+        if (myY == 0) {
             hexes[0] = null;
-        }else{
-            hexes[0] = getHex(myX,(myY - 1));
+        } else {
+            hexes[0] = getHex(myX, (myY - 1));
         }
         //the northeast
-        if (myX == 4 || (myY == 0 && myX % 2 == 1)){
+        if (myX == 4 || (myY == 0 && myX % 2 == 1)) {
             hexes[1] = null;
-        }else if(myX % 2 == 1){
-            hexes[1] = getHex(myX + 1,myY - 1);
-        }else{
-            hexes[1] = getHex(myX + 1,myY);
+        } else if (myX % 2 == 1) {
+            hexes[1] = getHex(myX + 1, myY - 1);
+        } else {
+            hexes[1] = getHex(myX + 1, myY);
         }
         //the southeast
-        if (myX == 4 || (myY == 3 && myX % 2 == 0)){
+        if (myX == 4 || (myY == 3 && myX % 2 == 0)) {
             hexes[2] = null;
-        }else if(myX % 2 == 1){
-            hexes[2] = getHex(myX + 1,myY);
-        }else{
-            hexes[2] = getHex(myX + 1,myY + 1);
+        } else if (myX % 2 == 1) {
+            hexes[2] = getHex(myX + 1, myY);
+        } else {
+            hexes[2] = getHex(myX + 1, myY + 1);
         }
         //the south neighbour
-        if (myY == 3){
+        if (myY == 3) {
             hexes[3] = null;
-        }else{
-            hexes[3] = getHex(myX,myY + 1);
+        } else {
+            hexes[3] = getHex(myX, myY + 1);
         }
         //the southwest
-        if (myX == 0 || (myY == 3 && myX % 2 == 0)){
+        if (myX == 0 || (myY == 3 && myX % 2 == 0)) {
             hexes[4] = null;
-        }else if(myX % 2 == 1){
-            hexes[4] = getHex(myX - 1,myY);
-        }else{
-            hexes[4] = getHex(myX - 1,myY + 1);
+        } else if (myX % 2 == 1) {
+            hexes[4] = getHex(myX - 1, myY);
+        } else {
+            hexes[4] = getHex(myX - 1, myY + 1);
         }
         //the northwest
-        if (myX == 0 || (myY == 0 && myX % 2 == 1)){
+        if (myX == 0 || (myY == 0 && myX % 2 == 1)) {
             hexes[5] = null;
-        }else if(myX % 2 == 1){
-            hexes[5] = getHex(myX - 1,myY - 1);
-        }else{
-            hexes[5] = getHex(myX - 1,myY);
+        } else if (myX % 2 == 1) {
+            hexes[5] = getHex(myX - 1, myY - 1);
+        } else {
+            hexes[5] = getHex(myX - 1, myY);
         }
 
         return hexes;
@@ -255,7 +259,7 @@ public class PenguinsPoolParty {
      * Determine whether the current board represents a solution to the game.
      * Remember, for a board state to be a solution to the game, all four ice
      * blocks must be placed on the board.
-     *
+     * <p>
      * Hint: can you think of a way to know whether all four ice blocks are on
      * the board without knowing their positions or rotations?
      *
@@ -266,9 +270,9 @@ public class PenguinsPoolParty {
         String t = this.boardToString(); //get the string of types
         char[] types = t.toCharArray();
         int count = 0;
-        for (char i : types){
-            if (i == 'I'){
-                count ++; // count the number of I
+        for (char i : types) {
+            if (i == 'I') {
+                count++; // count the number of I
             }
         }
         return count == 16;
@@ -278,36 +282,35 @@ public class PenguinsPoolParty {
      * Determine whether a placement of ice is valid according to this game's
      * board. You can obtain the placement of each hexagon in the ice block by
      * using the `getHexes()` method in the `Ice` class.
-     *
+     * <p>
      * For an ice block placement to be valid, each hexagon in the ice block
      * must:
-     *
+     * <p>
      * 1. be on the board, that is, no hexagon can be hanging off the board;
-     *    and
+     * and
      * 2. not overlap with any penguins or other ice blocks that have already
-     *    been placed on the board.
-     *
+     * been placed on the board.
+     * <p>
      * You do not need to worry about duplicate ice blocks. That is, you can
      * assume that the given ice block is not already on the board.
      *
      * @param ice the ice block to place on the board, at positions according
      *            to the ice block's hexagons
-     * @return    whether the placement of the given ice block is valid
-     *            according to the game rules
+     * @return whether the placement of the given ice block is valid
+     * according to the game rules
      */
     public boolean isIcePlacementValid(Ice ice) {
         // FIXME: Task 7
 
 
-
         Hex[] iceHex = ice.getHexes();// get the list of icebox hex
         boolean isFlag = true;
-        for (Hex hex : iceHex){
+        for (Hex hex : iceHex) {
             int x = hex.getX();
             int y = hex.getY();
-            if (x < 0 || x > 4 || y < 0 || y > 3){
+            if (x < 0 || x > 4 || y < 0 || y > 3) {
                 return false;
-            }else {
+            } else {
 
                 isFlag = isFlag && (this.board[x][y].getType() == HexType.EMPTY);
             }
@@ -317,18 +320,18 @@ public class PenguinsPoolParty {
 
     /**
      * Place an ice block on the board.
-     *
+     * <p>
      * Note that, for this method, you must change the board according to the
      * placement of the ice blocks. That is, you must change all hexes on the
      * board to type ICE that share a coordinate with one of the hexes in the
      * ice block.
-     *
+     * <p>
      * Note that you can assume that the placement of the ice block is valid.
-     *
+     * <p>
      * Once the ice block is successfully placed on the board, you will need
      * to modify it so that it is on the board. You will need to use the
      * `setOnBoard()` method in the Ice class to do this.
-     *
+     * <p>
      * Hint: you might find the `setHex()` method useful to solve this task.
      *
      * @param ice the ice block to place on the board
@@ -339,27 +342,27 @@ public class PenguinsPoolParty {
         for (Hex hex : iceHex) {
             int x = hex.getX();// get the x and y coordinate
             int y = hex.getY();
-            this.setHex(x,y,HexType.ICE);
+            this.setHex(x, y, HexType.ICE);
         }
         ice.setOnBoard(true);
     }
 
     /**
      * Remove an ice block from the board.
-     *
+     * <p>
      * Note that, for this method, you must change the board according to the
      * placement of the ice blocks. That is, you must change all hexes on the
      * board to type EMPTY that share a coordinate with one of the hexes in the
      * ice block to be removed.
-     *
+     * <p>
      * Note that you can assume that the removal of the ice block is valid,
      * that is that the ice block is validly placed and is already on the
      * board.
-     *
+     * <p>
      * Once the ice block is successfully removed from the board, you will need
      * to modify it so that it is off the board. You will need to use the
      * `setOnBoard()` method in the Ice class to do this.
-     *
+     * <p>
      * Hint: you might find the `setHex()` method useful to solve this task.
      *
      * @param ice the ice block to remove from the board
@@ -370,23 +373,23 @@ public class PenguinsPoolParty {
         for (Hex hex : iceHex) {
             int x = hex.getX();// get the x and y coordinate
             int y = hex.getY();
-            this.setHex(x,y,HexType.EMPTY);
+            this.setHex(x, y, HexType.EMPTY);
         }
         ice.setOnBoard(false);
     }
 
     /**
      * Get all the valid ice block placements from this game's board state.
-     *
+     * <p>
      * The ice blocks can be accessed from the `iceBlocks` field. Note that an
      * ice block should not be placed on the board if it is already on the
      * board. You can determine this using the `isOnBoard` field of the `Ice`
      * class.
-     *
+     * <p>
      * Return the array elements in alphabetical order: that is, first order by
      * ice block ID, then by origin x-coordinate, then by origin y-coordinate,
      * and finally by rotation.
-     *
+     * <p>
      * Note that this task is particularly difficult, and may require knowledge
      * of concepts beyond what has been taught in the course so far. If you
      * feel stuck on this problem, I would recommend you come back to it later
@@ -398,20 +401,43 @@ public class PenguinsPoolParty {
      */
     public String[] getAllValidPlacements() {
         // FIXME: Task 10
-
-        return new String[0];
+        ArrayList<String> icePlacements = new ArrayList<>(); //use the arraylist so that i can add string to a array before initialise it size
+        for (var ice : this.iceBlocks) {
+            if (!ice.isOnBoard()) {
+                for (int y = 0; y < 4; y++) {
+                    for (int x = 0; x < 5; x++) {
+                        ice.translate(this.board[x][y]);
+                        for (int i = 0; i < 6; i++) {
+                            if (isIcePlacementValid(ice)) {
+                                icePlacements.add(ice.toString());
+                            }
+                            ice.rotate60Degrees();
+                        }
+                    }
+                }
+            }
+        }
+        HashSet<String> set = new HashSet<>(icePlacements);// the best way to remove the duplicate element
+        icePlacements.clear();
+        icePlacements.addAll(set);//return the removed set to origin
+        Collections.sort(icePlacements);// order the list
+        String[] validIces = new String[icePlacements.size()];//give it to the string array
+        for (int j = 0; j < validIces.length; j++) {
+            validIces[j] = icePlacements.get(j);
+        }
+        return validIces;
     }
 
     /**
      * Find the solution to this game.
-     *
+     * <p>
      * The solution is a string, represented by:
-     *
+     * <p>
      * {String representation of ice block A}{String representation of ice block B}
      * {String representation of ice block C}{String representation of ice block D}
-     *
+     * <p>
      * Please consult the readme for solution and ice block encodings.
-     *
+     * <p>
      * Note that this task is particularly difficult, and may require knowledge
      * of concepts beyond what has been taught in the course so far. If you
      * feel stuck on this problem, I would recommend you come back to it later
