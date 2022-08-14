@@ -449,7 +449,91 @@ public class PenguinsPoolParty {
      */
     public String findSolution() {
         // FIXME: Task 11
-        return "";
-    }
+        int i = 0,j ,m ,n;
+        String[] allA, allB, allC, allD;
+        allA = this.getAllValidPlacements();
+        while (allA[i].charAt(0) == 'A') {
+            int AX = (allA[i].charAt(1) - '0');//x coordinate
+            int AY = (allA[i].charAt(2) - '0');//y coordinate
+            int AR = (allA[i].charAt(3) - '0');//rotation
+            iceBlocks[0].translate(board[AX][AY]);//translate the ice A to the board
+            while (iceBlocks[0].getRotation() != AR) {
+                iceBlocks[0].rotate60Degrees();  // rotate the A ice block
+            }
+            placeIceBlock(iceBlocks[0]); // place the A to the board
+            allB = this.getAllValidPlacements(); // move B
+            if (allB.length == 0) {       //if there is no B can place after place A, then place A again
+                i++;
+                removeIceBlock(iceBlocks[0]);
+                if (i >= allA.length) break;
+                continue;
+            }
+            j = 0;
+            while (allB[j].charAt(0) == 'B') {
+                int BX = (allB[j].charAt(1) - '0');//x coordinate
+                int BY = (allB[j].charAt(2) - '0');//y coordinate
+                int BR = (allB[j].charAt(3) - '0');//rotation
+                iceBlocks[1].translate(board[BX][BY]);//translate the ice B to the board
+                while (iceBlocks[1].getRotation() != BR) {
+                    iceBlocks[1].rotate60Degrees();  // rotate the B ice block
+                }
+                placeIceBlock(iceBlocks[1]); // place the B to the board
+                allC = this.getAllValidPlacements(); // move C
+                if (allC.length == 0) {       //if there is no C can place after place A and B, then place B again
+                    j++;
+                    removeIceBlock(iceBlocks[1]);
+                    if (j >= allB.length) break;
+                    continue;
+                }
+                m = 0;
+                while (allC[m].charAt(0) == 'C') {
+                    int CX = (allC[m].charAt(1) - '0');//x coordinate
+                    int CY = (allC[m].charAt(2) - '0');//y coordinate
+                    int CR = (allC[m].charAt(3) - '0');//rotation
+                    iceBlocks[2].translate(board[CX][CY]);//translate the ice C to the board
+                    while (iceBlocks[2].getRotation() != CR) {
+                        iceBlocks[2].rotate60Degrees();  // rotate the C ice block
+                    }
+                    placeIceBlock(iceBlocks[2]); // place the C to the board
+                    allD = this.getAllValidPlacements(); // move D
+                    if (allD.length == 0) {       //if there is no D can place after place ABC, then place C again
+                        m++;
+                        removeIceBlock(iceBlocks[2]);
+                        if (m >= allC.length) break;
+                        continue;
+                    }
+                    n = 0;
+                    while (allD[n].charAt(0) == 'D') {
+                        int DX = (allD[n].charAt(1) - '0');//x coordinate
+                        int DY = (allD[n].charAt(2) - '0');//y coordinate
+                        int DR = (allD[n].charAt(3) - '0');//rotation
+                        iceBlocks[3].translate(board[DX][DY]);//translate the ice A to the board
+                        while (iceBlocks[3].getRotation() != DR) {
+                            iceBlocks[3].rotate60Degrees();  // rotate the A ice block
+                        }
+                        if (isIcePlacementValid(iceBlocks[3])) {
+                            return iceBlocks[0].toString() + iceBlocks[1].toString()
+                                    + iceBlocks[2].toString() + iceBlocks[3].toString();
+                        }
+                        n++;
+                        if (n >= allD.length) break;
 
+                        removeIceBlock(iceBlocks[3]);
+                    }
+                    m++;
+                    if (m >= allC.length) break;
+                    removeIceBlock(iceBlocks[2]);
+                }
+                j++;
+                if (j >= allB.length) break;
+                removeIceBlock(iceBlocks[1]);
+            }
+            i++;
+            if (i >= allA.length) break;
+            removeIceBlock(iceBlocks[0]);
+        }
+        System.out.println("failed");
+        return "";
+
+    }
 }
